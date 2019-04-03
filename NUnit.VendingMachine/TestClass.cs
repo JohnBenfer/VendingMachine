@@ -136,7 +136,6 @@ namespace NUnit.VendingMachine
             vending.dispenseSelection();
 
             Assert.AreEqual(vending.Stock[vending.Selection].name , vending.Stock[0].name);
-
         }
 
         [Test]
