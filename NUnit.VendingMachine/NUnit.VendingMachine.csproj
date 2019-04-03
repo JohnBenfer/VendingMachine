@@ -41,7 +41,8 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="StockItem.cs" />
-    <Compile Include="TestClass.cs" />
+    <Compile Include="IntegrationTestClass.cs" />
+    <Compile Include="UnitTestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendingMachine.cs" />
   </ItemGroup>

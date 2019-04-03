@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace NUnit.VendingMachine
 {
     [TestFixture]
-    public class TestClass
+    public class UnitTestClass
     {
         [Test]
         public void Test1CorrectBalance()
@@ -207,7 +207,7 @@ namespace NUnit.VendingMachine
         [Test]
         public void Test10ReadFile()
         {
-            string path = "U:/HW4/sampleStock\n";
+            string path = "U:/HW4/sampleStock\nU:/HW4/sampleStock";
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
             writer.Write(path);
@@ -217,6 +217,7 @@ namespace NUnit.VendingMachine
 
             VendingMachine vending = new VendingMachine();
             List<string> s = vending.readFile();
+            //Console.WriteLine(s.Count);
             Assert.AreEqual(s[0], "Cola,1.25,3");
         }
 
@@ -232,6 +233,7 @@ namespace NUnit.VendingMachine
             Console.SetIn(new StreamReader(stream));
 
             VendingMachine vending = new VendingMachine();
+            vending.start();
             Assert.AreEqual(vending.Status, VendingMachine.State.OFF);
         }
 
