@@ -220,6 +220,21 @@ namespace NUnit.VendingMachine
             Assert.AreEqual(s[0], "Cola,1.25,3");
         }
 
+        [Test]
+        public void Test11Exit()
+        {
+            string path = "U:/HW4/sampleStock\ne";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+            Assert.AreEqual(vending.Status, VendingMachine.State.OFF);
+        }
+
 
 
 
