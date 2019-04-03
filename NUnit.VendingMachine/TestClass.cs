@@ -73,5 +73,139 @@ namespace NUnit.VendingMachine
         }
 
 
+        [Test]
+        public void Test4()
+        {
+
+            string path = "U:/HW4/sampleStock\n1\n1\n0";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.dispenseSelection();
+
+            Assert.AreEqual(vending.Selection, 0);
+
+        }
+
+        [Test]
+        public void Test5()
+        {
+
+            string path = "U:/HW4/sampleStock\n1\n1\n0";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.dispenseSelection();
+
+            Assert.AreEqual(vending.Stock[0].name, "Cola");
+
+        }
+
+        [Test]
+        public void Test6()
+        {
+
+            string path = "U:/HW4/sampleStock\n1\n1\n0";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.dispenseSelection();
+
+            Assert.AreEqual(vending.Stock[vending.Selection].name , vending.Stock[0].name);
+
+        }
+
+        [Test]
+        public void Test7()
+        {
+
+            string path = "U:/HW4/sampleStock\n1\n1\n0";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.dispenseSelection();
+
+            Assert.AreEqual(vending.Balance, 0.75);
+
+        }
+
+        [Test]
+        public void Test8()
+        {
+
+            string path = "U:/HW4/sampleStock\n1\n1\n0";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.dispenseSelection();
+            vending.dispenseChange();
+
+            Assert.AreEqual(vending.Balance, 0);
+
+        }
+        /// <summary>
+        /// Tests for the vending machine accepting invalid currency amount.
+        /// </summary>
+        [Test]
+        public void Test9()
+        {
+            string path = "U:/HW4/sampleStock\n.07";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+
+            vending.insertMoney();
+
+            Assert.AreNotEqual(vending.Balance, 0.07);
+
+        }
+
+
+
     }
 }
