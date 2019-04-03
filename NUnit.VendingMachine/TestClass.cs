@@ -12,7 +12,7 @@ namespace NUnit.VendingMachine
     public class TestClass
     {
         [Test]
-        public void Test1()
+        public void Test1CorrectBalance()
         {
             string path = "U:/HW4/sampleStock\n.25\n.25";
             MemoryStream stream = new MemoryStream();
@@ -30,7 +30,7 @@ namespace NUnit.VendingMachine
         }
 
         [Test]
-        public void Test2()
+        public void Test2DispenseChange()
         {
 
             string path = "U:/HW4/sampleStock\n1\n.25\n.25\n.25\n.25\nr";
@@ -53,7 +53,7 @@ namespace NUnit.VendingMachine
         }
 
         [Test]
-        public void Test3()
+        public void Test3Restock()
         {
 
             string path = "U:/HW4/sampleStock\nr\nU:/HW4/restock1";
@@ -74,7 +74,7 @@ namespace NUnit.VendingMachine
 
 
         [Test]
-        public void Test4()
+        public void Test4DispenseSelection()
         {
 
             string path = "U:/HW4/sampleStock\n1\n1\n0";
@@ -96,7 +96,7 @@ namespace NUnit.VendingMachine
         }
 
         [Test]
-        public void Test5()
+        public void Test5DispenseSelection()
         {
 
             string path = "U:/HW4/sampleStock\n1\n1\n0";
@@ -118,7 +118,7 @@ namespace NUnit.VendingMachine
         }
 
         [Test]
-        public void Test6()
+        public void Test6DispenseSelection()
         {
 
             string path = "U:/HW4/sampleStock\n1\n1\n0";
@@ -139,7 +139,7 @@ namespace NUnit.VendingMachine
         }
 
         [Test]
-        public void Test7()
+        public void Test7DispenseSelectionRemainingBalance()
         {
 
             string path = "U:/HW4/sampleStock\n1\n1\n0";
@@ -161,7 +161,7 @@ namespace NUnit.VendingMachine
         }
 
         [Test]
-        public void Test8()
+        public void Test8DispenseSelectionAndBalanceRemainingBalance()
         {
 
             string path = "U:/HW4/sampleStock\n1\n1\n0";
@@ -203,6 +203,22 @@ namespace NUnit.VendingMachine
             Assert.AreNotEqual(vending.Balance, 0.07);
 
         }
+
+        [Test]
+        public void Test10ReadFile()
+        {
+            string path = "U:/HW4/sampleStock";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+            list<string> s = vending.readFile();
+        }
+
 
 
 
