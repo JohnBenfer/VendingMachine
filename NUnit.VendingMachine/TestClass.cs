@@ -216,7 +216,8 @@ namespace NUnit.VendingMachine
             Console.SetIn(new StreamReader(stream));
 
             VendingMachine vending = new VendingMachine();
-            list<string> s = vending.readFile();
+            List<string> s = vending.readFile();
+            Assert.AreEqual(s[0], "Cola,1.25,3");
         }
 
 
