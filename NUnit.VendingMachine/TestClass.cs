@@ -207,7 +207,7 @@ namespace NUnit.VendingMachine
         [Test]
         public void Test10ReadFile()
         {
-            string path = "U:/HW4/sampleStock";
+            string path = "U:/HW4/sampleStock\n";
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
             writer.Write(path);
