@@ -28,5 +28,50 @@ namespace NUnit.VendingMachine
             Assert.AreEqual(vending.Balance, 0.5);
 
         }
+
+        [Test]
+        public void Test2()
+        {
+
+            string path = "U:/HW4/sampleStock\n1\n.25\n.25\n.25\n.25\nr";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.insertMoney();
+            vending.dispenseChange();
+            Assert.AreEqual(vending.Balance, 0);
+
+        }
+
+        [Test]
+        public void Test3()
+        {
+
+            string path = "U:/HW4/sampleStock\nr\nU:/HW4/restock1";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
+
+            VendingMachine vending = new VendingMachine();
+
+            vending.restock();
+
+            Assert.GreaterOrEqual(vending.Stock[1].count, 0);
+
+        }
+
+
     }
 }
