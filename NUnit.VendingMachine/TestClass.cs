@@ -14,7 +14,7 @@ namespace NUnit.VendingMachine
         [Test]
         public void Test1()
         {
-            string path = "U:/HW4\n.25\n.25";
+            string path = "U:/HW4/sampleStock\n.25\n.25";
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
             writer.Write(path);
