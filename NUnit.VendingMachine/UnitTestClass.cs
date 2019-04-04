@@ -11,10 +11,11 @@ namespace NUnit.VendingMachine
     [TestFixture]
     public class UnitTestClass
     {
-        [Test]
-        public void TestCorrectBalance()
+        [TestCase(".25\n.25", 0.5, 2)]
+        [TestCase("1\n.1\n.25", 1.35, 3)]
+        public void TestCorrectBalance(string s, double total, int num)
         {
-            string path = "U:/HW4/sampleStock\n.25\n.25";
+            string path = "U:/HW4/sampleStock\n" + s;
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
             writer.Write(path);
@@ -23,9 +24,12 @@ namespace NUnit.VendingMachine
             Console.SetIn(new StreamReader(stream));
 
             VendingMachine vending = new VendingMachine();
-            vending.insertMoney();
-            vending.insertMoney();
-            Assert.AreEqual(vending.Balance, 0.5);
+            for (int i = 0; i < num; i++)
+            {
+                vending.insertMoney();
+            }
+
+            Assert.AreEqual(vending.Balance, total);
 
         }
         
@@ -41,11 +45,8 @@ namespace NUnit.VendingMachine
             writer.Flush();
             stream.Position = 0;
             Console.SetIn(new StreamReader(stream));
-
             VendingMachine vending = new VendingMachine();
-
             vending.restock();
-
             Assert.GreaterOrEqual(vending.Stock[1].count, 0);
 
         }
@@ -53,10 +54,12 @@ namespace NUnit.VendingMachine
         /// <summary>
         /// Tests for the vending machine accepting invalid currency amount.
         /// </summary>
-        [Test]
-        public void TestInvalidCoin()
+        [TestCase(0.02)]
+        [TestCase(0.75)]
+        [TestCase(0.07)]
+        public void TestInvalidCoin(double coin)
         {
-            string path = "U:/HW4/sampleStock\n.07";
+            string path = "U:/HW4/sampleStock\n" + coin.ToString();
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
             writer.Write(path);
@@ -65,11 +68,8 @@ namespace NUnit.VendingMachine
             Console.SetIn(new StreamReader(stream));
 
             VendingMachine vending = new VendingMachine();
-
             vending.insertMoney();
-
-            Assert.AreNotEqual(vending.Balance, 0.07);
-
+            Assert.AreNotEqual(vending.Balance, coin);
         }
 
         [Test]
@@ -104,7 +104,24 @@ namespace NUnit.VendingMachine
             Assert.AreEqual(vending.Status, VendingMachine.State.OFF);
         }
 
+        [Test]
+        public void TestMain()
+        {
+            string path = "U:/HW4/sampleStock\ne";
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(path);
+            writer.Flush();
+            stream.Position = 0;
+            Console.SetIn(new StreamReader(stream));
 
+            try
+            {
+                MainClass.Main(null);
+            } catch (Exception) {
+                Assert.Fail();
+            }
+        }
 
 
     }
