@@ -11,10 +11,10 @@ namespace NUnit.VendingMachine
     [TestFixture]
     public class UnitTestClass
     {
-        [Test]
-        public void TestCorrectBalance()
+        [TestCase("1\n.25\n.1", 1.35, 3)]
+        public void TestCorrectBalance(string s, double total, int count)
         {
-            string path = "U:/HW4/sampleStock\n.25\n.25";
+            string path = "U:/HW4/sampleStock\n" + s;
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
             writer.Write(path);
@@ -23,8 +23,10 @@ namespace NUnit.VendingMachine
             Console.SetIn(new StreamReader(stream));
 
             VendingMachine vending = new VendingMachine();
-            vending.insertMoney();
-            vending.insertMoney();
+            for (int i = 0; i < count; i++)
+            { 
+                vending.insertMoney();
+            }
             Assert.AreEqual(vending.Balance, 0.5);
 
         }
